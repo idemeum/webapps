@@ -48,6 +48,7 @@ export const TextArea: React.FC<TextAreaProps> = styled.textarea`
   }
 
   ${color} ${space} ${width} ${height} ${error} ${resize};
+  ${props => props.theme.elements.input}
 `;
 
 function error({

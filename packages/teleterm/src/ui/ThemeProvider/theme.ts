@@ -26,6 +26,7 @@ import {
   yellow,
 } from 'design/theme/palette';
 import typography, { fontSizes, fontWeights } from 'design/theme/typography';
+import { css } from 'styled-components';
 
 const space = [0, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80];
 const contrastThreshold = 3;
@@ -104,6 +105,27 @@ const colors = {
   success: teal.A700,
 };
 
+const input = css`
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: none;
+  background: inherit;
+  color: white;
+
+  &:hover,
+  &:focus {
+    color: ${props => props.theme.colors.primary.contrastText};
+    border-color: ${props => props.theme.colors.light};
+  }
+
+  &:focus {
+    border-color: ${props => props.theme.colors.secondary.main};
+  }
+
+  ::placeholder {
+    opacity: 1;
+  }
+`;
+
 const borders = [
   0,
   '1px solid',
@@ -123,6 +145,7 @@ const theme = {
   fontSizes,
   space,
   borders,
+  elements: { input },
   radii: [0, 2, 4, 8, 16, 9999, '100%'],
   regular: fontWeights.regular,
   bold: fontWeights.bold,
