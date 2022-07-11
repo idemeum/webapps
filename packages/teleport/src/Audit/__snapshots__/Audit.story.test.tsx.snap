@@ -2636,13 +2636,13 @@ exports[`list of all events 1`] = `
               color="light"
               font-size="3"
             />
-            App Session Started
+            Session Recording Viewed
           </div>
         </td>
         <td
           style="word-break: break-word;"
         >
-          User [kimlisa] has started an app session [6593cf87-9839-4f18-abf8-c54873aaeb4e]
+          User [kimlisa] viewed a session recording [6593cf87-9839-4f18-abf8-c54873aaeb4e]
         </td>
         <td
           style="min-width: 120px;"
