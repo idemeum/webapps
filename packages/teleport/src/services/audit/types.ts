@@ -734,7 +734,7 @@ export type RawEvents = {
   [eventCodes.SESSION_RECORDING_VIEW]: RawEvent<
     typeof eventCodes.SESSION_RECORDING_VIEW,
     {
-      session_id: string;
+      sid: string;
       user: string;
     }
   >;
