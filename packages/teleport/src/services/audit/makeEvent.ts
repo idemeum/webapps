@@ -680,6 +680,13 @@ export const formatters: Formatters = {
       return `Certificate of type [${cert_type}] issued for [${user}]`;
     },
   },
+  [eventCodes.SESSION_RECORDING_VIEW]: {
+    type: 'session.recording.view',
+    desc: 'Session Recording Viewed',
+    format: ({ session_id, user }) => {
+      return `User [${user}] viewed a session recording [${session_id}]`;
+    },
+  },
   [eventCodes.UNKNOWN]: {
     type: 'unknown',
     desc: 'Unknown Event',
