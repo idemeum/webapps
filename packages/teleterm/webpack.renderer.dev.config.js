@@ -1,5 +1,6 @@
 const { spawn } = require('child_process');
 const path = require('path');
+const fs = require('fs');
 const defaultCfg = require('@gravitational/build/webpack/webpack.dev.config');
 const configFactory = require('@gravitational/build/webpack/webpack.base');
 const { extend, createHtmlPlugin } = require('./webpack.renderer.extend');

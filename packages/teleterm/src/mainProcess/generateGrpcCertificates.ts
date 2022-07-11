@@ -1,11 +1,10 @@
-import selfsigned from 'selfsigned';
 import fs from 'fs/promises';
 import path from 'path';
 import mkcert from 'mkcert';
 
-export async function generateGrpcCertificates(userDataDir: string): Promise<void> {
-    function getPath(fileName?: string): string {
-        return path.join(userDataDir, 'certs1', fileName || '');
+export async function generateGrpcCertificates(certsDir: string): Promise<void> {
+    function getPath(fileName: string): string {
+        return path.join(certsDir, fileName);
     }
 
     const ca = await mkcert.createCA({
@@ -68,11 +67,6 @@ export async function generateGrpcCertificates(userDataDir: string): Promise<voi
     // });
     // console.log(pems);
 
-
-    if (!await isExists(getPath())) {
-        await fs.mkdir(getPath());
-    }
-
     await Promise.all([
         fs.writeFile(getPath('ca.crt'), ca.cert),
         fs.writeFile(getPath('server.crt'), server.cert),
@@ -81,12 +75,3 @@ export async function generateGrpcCertificates(userDataDir: string): Promise<voi
         fs.writeFile(getPath('client.key'), client.key)
     ])
 }
-
-async function isExists(path: string): Promise<boolean> {
-    try {
-        await fs.access(path);
-        return true;
-    } catch {
-        return false;
-    }
-};

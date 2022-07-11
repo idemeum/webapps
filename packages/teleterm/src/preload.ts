@@ -5,23 +5,30 @@ import createLoggerService from 'teleterm/services/logger';
 import PreloadLogger from 'teleterm/logger';
 import { ElectronGlobals } from './types';
 import { createPtyService } from 'teleterm/services/pty/ptyService';
+import { readGrpcCertificates } from './mainProcess/readGrpcCertificates';
 
-const mainProcessClient = createMainProcessClient();
-const runtimeSettings = mainProcessClient.getRuntimeSettings();
-const loggerService = createLoggerService({
-  dev: runtimeSettings.dev,
-  dir: runtimeSettings.userDataDir,
-  name: 'renderer',
-});
+async function startPreload(): Promise<void> {
+  const mainProcessClient = createMainProcessClient();
+  const runtimeSettings = mainProcessClient.getRuntimeSettings();
+  const loggerService = createLoggerService({
+    dev: runtimeSettings.dev,
+    dir: runtimeSettings.userDataDir,
+    name: 'renderer',
+  });
 
-PreloadLogger.init(loggerService);
+  PreloadLogger.init(loggerService);
 
-const tshClient = createTshClient(runtimeSettings.tshd.networkAddr);
-const ptyServiceClient = createPtyService(runtimeSettings);
+  const certificates = await readGrpcCertificates(runtimeSettings.certsDir);
 
-contextBridge.exposeInMainWorld('electron', {
-  mainProcessClient,
-  tshClient,
-  ptyServiceClient,
-  loggerService,
-} as ElectronGlobals);
+  const tshClient = createTshClient(runtimeSettings, certificates);
+  const ptyServiceClient = createPtyService(runtimeSettings, certificates);
+
+  contextBridge.exposeInMainWorld('electron', {
+    mainProcessClient,
+    tshClient,
+    ptyServiceClient,
+    loggerService,
+  } as ElectronGlobals);
+}
+
+startPreload();

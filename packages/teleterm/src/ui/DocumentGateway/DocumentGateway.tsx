@@ -33,6 +33,7 @@ import FieldInput from 'shared/components/FieldInput';
 import Validation from 'shared/components/Validation';
 import { debounce } from 'lodash';
 import styled from 'styled-components';
+import { Gateway, GatewayProtocol } from 'teleterm/services/tshd/types';
 
 type Props = {
   visible: boolean;
@@ -123,7 +124,7 @@ export function DocumentGateway(props: State) {
         </Validation>
       </Flex>
       <CliCommand
-        cliCommand={gateway.cliCommand}
+        cliCommand={getCliCommand(gateway)}
         isLoading={isLoading}
         onRun={runCliCommand}
       />
@@ -142,7 +143,7 @@ export function DocumentGateway(props: State) {
         `}
       >
         Configure the GUI database client to connect to host{' '}
-        <code>{gateway.localAddress}</code> on port{' '}
+        <code>{getLocalAddress(gateway)}</code> on port{' '}
         <code>{gateway.localPort}</code> as user{' '}
         <code>{gateway.targetUser}</code>.
       </Text>
@@ -159,6 +160,20 @@ export function DocumentGateway(props: State) {
       </Text>
     </Box>
   );
+}
+
+function getLocalAddress(gateawy: Gateway) {
+  if (gateawy.protocol as GatewayProtocol === 'sqlserver' && gateawy.localAddress === 'localhost') {
+    return '127.0.0.1'
+  }
+  return gateawy.localAddress;
+}
+
+function getCliCommand(gateawy: Gateway) {
+  if (gateawy.protocol as GatewayProtocol === 'sqlserver' && gateawy.localAddress === 'localhost') {
+    return gateawy.cliCommand.replace('localhost', '127.0.0.1');
+  }
+  return gateawy.cliCommand;
 }
 
 function CliCommand({

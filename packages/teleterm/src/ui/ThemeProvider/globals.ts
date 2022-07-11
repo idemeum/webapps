@@ -30,6 +30,20 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
+  // custom scrollbars
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #757575;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: rgba(0,0,0,0.5);
+  }
+
   input, textarea {
     font-family: ${props => props.theme.font};
   }

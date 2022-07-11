@@ -8,8 +8,8 @@ import {
 import { PtyEventsStreamHandler } from './ptyEventsStreamHandler';
 import { PtyHostClient } from '../types';
 
-export function createPtyHostClient(address: string): PtyHostClient {
-  const client = new GrpcClient(address, credentials.createInsecure());
+export function createPtyHostClient(address: string, rootCert: Buffer, privateKey: Buffer, certChain: Buffer): PtyHostClient {
+  const client = new GrpcClient(address, credentials.createSsl(rootCert, privateKey, certChain));
 
   return {
     createPtyProcess(ptyOptions) {

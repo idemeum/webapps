@@ -5,14 +5,16 @@ import * as types from 'teleterm/services/tshd/types';
 import middleware, { withLogging } from './middleware';
 import createAbortController from './createAbortController';
 import Logger from 'teleterm/logger';
+import { GrpcCertificates } from 'teleterm/mainProcess/readGrpcCertificates';
+import { RuntimeSettings } from 'teleterm/types';
 
-export function createGrpcClient(addr?: string) {
-  return new TerminalServiceClient(addr, grpc.credentials.createInsecure());
+export function createGrpcClient(addr: string, grpcCertificates: GrpcCertificates) {
+  return new TerminalServiceClient(addr, grpc.credentials.createSsl(grpcCertificates.caCert, grpcCertificates.clientKey, grpcCertificates.clientCert));
 }
 
-export default function createClient(addr: string) {
+export default function createClient(runtimeSettings: RuntimeSettings, grpcCertificates: GrpcCertificates) {
   const logger = new Logger('tshd');
-  const tshd = middleware(createGrpcClient(addr), [withLogging(logger)]);
+  const tshd = middleware(createGrpcClient(runtimeSettings.tshd.networkAddr, grpcCertificates), [withLogging(logger)]);
 
   // Create a client instance that could be shared with the  renderer (UI) via Electron contextBridge
   const client = {
@@ -164,15 +166,15 @@ export default function createClient(addr: string) {
     async login(params: types.LoginParams, abortSignal?: types.TshAbortSignal) {
       const ssoParams = params.sso
         ? new api.LoginRequest.SsoParams()
-            .setProviderName(params.sso.providerName)
-            .setProviderType(params.sso.providerType)
+          .setProviderName(params.sso.providerName)
+          .setProviderType(params.sso.providerType)
         : null;
 
       const localParams = params.local
         ? new api.LoginRequest.LocalParams()
-            .setToken(params.local.token)
-            .setUser(params.local.username)
-            .setPassword(params.local.password)
+          .setToken(params.local.token)
+          .setUser(params.local.username)
+          .setPassword(params.local.password)
         : null;
 
       return withAbort(abortSignal, callRef => {
