@@ -358,12 +358,12 @@ exports[`list of all events 1`] = `
           </strong>
            - 
           <strong>
-            85
+            86
           </strong>
            of
            
           <strong>
-            85
+            86
           </strong>
         </div>
         <button
@@ -434,6 +434,43 @@ exports[`list of all events 1`] = `
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td
+          style="vertical-align: inherit;"
+        >
+          <div
+            class="c14"
+          >
+            <span
+              class="c10 c15 icon icon-list c10 c15"
+              color="light"
+              font-size="3"
+            />
+            Session Recording Accessed
+          </div>
+        </td>
+        <td
+          style="word-break: break-word;"
+        >
+          User [ops@gravitational.io] accessed a session recording [44c6cea8-362f-11ea-83aa-125400432324]
+        </td>
+        <td
+          style="min-width: 120px;"
+        >
+          2022-07-14 18:04:37
+        </td>
+        <td
+          align="right"
+        >
+          <button
+            class="c16"
+            kind="border"
+            width="87px"
+          >
+            Details
+          </button>
+        </td>
+      </tr>
       <tr>
         <td
           style="vertical-align: inherit;"
@@ -2636,13 +2673,13 @@ exports[`list of all events 1`] = `
               color="light"
               font-size="3"
             />
-            Session Recording Viewed
+            App Session Started
           </div>
         </td>
         <td
           style="word-break: break-word;"
         >
-          User [kimlisa] viewed a session recording [6593cf87-9839-4f18-abf8-c54873aaeb4e]
+          User [kimlisa] has started an app session [6593cf87-9839-4f18-abf8-c54873aaeb4e]
         </td>
         <td
           style="min-width: 120px;"
