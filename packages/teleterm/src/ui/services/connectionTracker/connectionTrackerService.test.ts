@@ -1,4 +1,4 @@
-import { WorkspacesService } from '../workspacesService';
+import { DocumentGateway, WorkspacesService } from '../workspacesService';
 import { ClustersService } from '../clusters';
 import { StatePersistenceService } from '../statePersistence';
 
@@ -77,4 +77,46 @@ it('removeItemsBelongingToRootCluster removes connections', () => {
   expect(service.getConnections()).toEqual([
     { clusterName: 'remote_leaf', ...connections[3] },
   ]);
+});
+
+// TODO: Add test for updating db port of connection. WorkspacesState needs to be mocked so that we
+// can manually trigger `_refreshState`.
+it('updates the port of a gateway connection', () => {
+  const connection: TrackedConnection = {
+    kind: 'connection.gateway',
+    connected: true,
+    id: 'Swm-6IgVvKGeUSSAJ0irc',
+    title: 'alice@test/pg',
+    port: '49671',
+    targetUri: '/clusters/localhost/dbs/test',
+    targetUser: 'alice',
+    targetName: 'test',
+    targetSubresourceName: 'pg',
+    gatewayUri: '/gateways/4f68927b-579c-47a8-b965-efa8159203c9',
+  };
+  jest
+    .spyOn(StatePersistenceService.prototype, 'getConnectionTrackerState')
+    .mockImplementation(() => {
+      return {
+        connections: [connection],
+      };
+    });
+
+  const document: DocumentGateway = {
+    kind: 'doc.gateway',
+    uri: 'test-doc-uri',
+    title: 'Test title',
+    gatewayUri: connection.gatewayUri,
+    targetUri: connection.targetUri,
+    targetUser: connection.targetUser,
+    targetName: connection.targetName,
+    targetSubresourceName: connection.targetSubresourceName,
+    port: connection.port,
+  };
+
+  // TODO: Initialize WorkspacesService with state set to that document.
+  // Then initialize ConnectionTrackerService.
+  // Then do WorkspacesService.setState which updates the doc.
+
+  expect(true).toBe(false);
 });

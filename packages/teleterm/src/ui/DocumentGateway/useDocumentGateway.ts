@@ -82,6 +82,7 @@ export default function useGateway(doc: types.DocumentGateway) {
       port
     );
 
+    // TODO: Update connection tracker when changing port from offline or online doc gateway.
     workspaceDocumentsService.update(doc.uri, {
       targetSubresourceName: updatedGateway.targetSubresourceName,
       port: updatedGateway.localPort,
