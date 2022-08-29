@@ -83,7 +83,6 @@ export default function Player() {
         <Tabs flex="1 0">
           <TabItem title="Session Player" />
         </Tabs>
-        <ActionBar onLogout={onLogout} />
       </Flex>
       <Flex
         bg={colors.bgTerminal}
