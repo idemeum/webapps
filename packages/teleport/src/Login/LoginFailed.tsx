@@ -19,27 +19,23 @@ import { LoginFailed as CardFailed } from 'design/CardError';
 import { Route, Switch } from 'teleport/components/Router';
 import LogoHero from 'teleport/components/LogoHero';
 import cfg from 'teleport/config';
+import ErrorPage from './ErrorPage';
 
 export default function Container() {
   return (
     <Switch>
       <Route path={cfg.routes.loginErrorCallback}>
-        <LoginFailed message="unable to process callback" />
+        <ErrorPage message="Unable to process callback" redirectUrl={cfg.routes.login}/>
+      </Route>
+      <Route path={cfg.routes.loginErrorLegacy}>
+        <ErrorPage message="Unable to Login, Please check Teleport's logs for details" redirectUrl={cfg.routes.login}/> 
       </Route>
       <Route path={cfg.routes.loginErrorUnauthorized}>
-        <LoginFailed message="You are not authorized, please contact your SSO administrator." />
+        <ErrorPage message="You are not authorized, please contact your SSO administrator." redirectUrl={cfg.routes.login} />
       </Route>
-      <Route component={LoginFailed} />
+      <Route path={cfg.routes.loginError}>
+        <ErrorPage message="You are not authorized, please contact your SSO administrator." redirectUrl={cfg.routes.login} />
+      </Route>
     </Switch>
-  );
-}
-
-export function LoginFailed({ message }: { message?: string }) {
-  const defaultMsg = "unable to login, please check Teleport's log for details";
-  return (
-    <>
-      <LogoHero />
-      <CardFailed loginUrl={cfg.routes.login} message={message || defaultMsg} />
-    </>
   );
 }

@@ -21,7 +21,6 @@ import LogoHero from 'teleport/components/LogoHero';
 export default function LoginSuccess() {
   return (
     <>
-      <LogoHero />
       <CardSuccessLogin />
     </>
   );
