@@ -19,7 +19,7 @@ import { LoginFailed as CardFailed } from 'design/CardError';
 import { Route, Switch } from 'teleport/components/Router';
 import LogoHero from 'teleport/components/LogoHero';
 import cfg from 'teleport/config';
-import ErrorPage from './ErrorPage';
+import ErrorPage from './ErrorPage/ErrorPage';
 
 export default function Container() {
   return (
