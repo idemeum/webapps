@@ -1,9 +1,10 @@
 import React from 'react';
 import { Text, Box, Flex } from 'design';
 import { useEffect, useState } from 'react';
+import { CircleCheck } from 'design/Icon';
 import '../assets/idemeum/fonts.css'
 
-export default function Card({ message, redirectUrl }: { message?: string, redirectUrl?: string }) {
+export default function Card({ message, redirectUrl, showIcon }: { message?: string, redirectUrl?: string, showIcon?: boolean }) {
 
     let url = "";
     const [windowSize, setWindowSize] = useState(getWindowSize());
@@ -52,8 +53,12 @@ export default function Card({ message, redirectUrl }: { message?: string, redir
                         idemeum
                     </Text>
                 </Flex>
+                {showIcon ? <Flex justifyContent="center" alignItems="center" css={{ paddingTop: 100, marginBottom: -175 }}>
+                    <CircleCheck mb={3} fontSize={56} color="success" />
+                </Flex> : null}
 
                 <Flex justifyContent="center" alignItems="center">
+
                     <Text style={{ color: 'black', marginTop: 200, fontSize: 20, fontWeight: 500, fontFamily: 'Red Hat Display' }}>
                         {message}
                     </Text>
