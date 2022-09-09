@@ -15,14 +15,13 @@ limitations under the License.
 */
 
 import React from 'react';
-import { CardSuccessLogin } from 'design';
-import LogoHero from 'teleport/components/LogoHero';
+import SuccessCard from '@gravitational/design/src/idemeum/Card';
 
 export default function LoginSuccess() {
   return (
     <>
-      <LogoHero />
-      <CardSuccessLogin />
+    <SuccessCard message=" You have successfully signed into your account. 
+     You can close this window and continue using the product." showIcon={true}/>
     </>
   );
 }
