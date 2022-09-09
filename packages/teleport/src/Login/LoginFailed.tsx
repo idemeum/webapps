@@ -15,26 +15,24 @@ limitations under the License.
 */
 
 import React from 'react';
-import { LoginFailed as CardFailed } from 'design/CardError';
 import { Route, Switch } from 'teleport/components/Router';
-import LogoHero from 'teleport/components/LogoHero';
 import cfg from 'teleport/config';
-import ErrorPage from './ErrorPage/ErrorPage';
+import ErrorPage from '@gravitational/design/src/idemeum/Card';
 
 export default function Container() {
   return (
     <Switch>
       <Route path={cfg.routes.loginErrorCallback}>
-        <ErrorPage message="Unable to process callback" redirectUrl={cfg.routes.login}/>
+        <ErrorPage message="Unable to process callback" redirectUrl={true} />
       </Route>
       <Route path={cfg.routes.loginErrorLegacy}>
-        <ErrorPage message="Unable to Login, Please check Teleport's logs for details" redirectUrl={cfg.routes.login}/> 
+        <ErrorPage message="You are not authorized, please contact your administrator" redirectUrl={true}/> 
       </Route>
       <Route path={cfg.routes.loginErrorUnauthorized}>
-        <ErrorPage message="You are not authorized, please contact your SSO administrator." redirectUrl={cfg.routes.login} />
+        <ErrorPage message="You are not authorized, please contact your administrator." redirectUrl={true} />
       </Route>
       <Route path={cfg.routes.loginError}>
-        <ErrorPage message="You are not authorized, please contact your SSO administrator." redirectUrl={cfg.routes.login} />
+        <ErrorPage message="You are not authorized, please contact your administrator." redirectUrl={true} />
       </Route>
     </Switch>
   );
