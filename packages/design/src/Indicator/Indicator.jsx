@@ -66,14 +66,14 @@ Indicator.defaultProps = {
 };
 
 const StyledSpinner = styled(SpinnerIcon)`
-  ${({ fontSize = '32px' }) => `
+  ${({ fontSize = '60px' }) => `
     font-size: ${fontSize};
     height: ${fontSize};
     width: ${fontSize};
   `}
 
   animation: anim-rotate 2s infinite linear;
-  color: #fff;
+  color: #007bff;
   display: inline-block;
   margin: 16px;
   opacity: 0.24;

@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Flex, Indicator } from 'design';
 import { AccessDenied } from 'design/CardError';
 import useAppLauncher from './useAppLauncher';
@@ -25,12 +25,32 @@ export default function Container() {
 }
 
 export function AppLauncher(props: ReturnType<typeof useAppLauncher>) {
+
+  const [windowSize, setWindowSize] = useState(getWindowSize());
+
+  function handleWindowResize() {
+    setWindowSize(getWindowSize());
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, [])
+
   if (props.status === 'failed') {
     return <AccessDenied message={props.statusText} />;
   }
 
+  function getWindowSize() {
+    const { innerWidth, innerHeight } = window;
+    return { innerWidth, innerHeight };
+  }
+
   return (
-    <Flex height="180px" justifyContent="center" alignItems="center" flex="1">
+    <Flex height={windowSize.innerHeight} justifyContent="center" alignItems="center" flex="1" css={{ backgroundColor: 'white' }}>
       <Indicator />
     </Flex>
   );
