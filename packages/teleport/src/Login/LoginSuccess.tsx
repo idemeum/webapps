@@ -21,7 +21,7 @@ export default function LoginSuccess() {
   return (
     <>
     <SuccessCard message=" You have successfully signed into your account. 
-     You can close this window and continue using the product." redirectUrl= "randome.xom"/>
+     You can close this window and continue using the product." redirectUrl= "randome.xom" showIcon={true}/>
 
     </>
   );
