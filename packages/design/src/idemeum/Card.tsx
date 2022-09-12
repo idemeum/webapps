@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, Box, Flex } from 'design';
 import { useEffect, useState } from 'react';
 import { CircleCheck } from 'design/Icon';
-import '../assets/idemeum/fonts.css'
+import '../assets/idemeum/fonts/fonts.css'
 
 export default function Card({ message, redirectUrl, showIcon }: { message?: string, redirectUrl?: boolean, showIcon?: boolean }) {
 
