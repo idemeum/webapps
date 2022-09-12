@@ -29,6 +29,7 @@ class Indicator extends React.Component {
   constructor(props) {
     super(props);
     this._timer = null;
+    this._isAppLauncher = props.isAppLauncher;
     this._delay = props.delay;
     this.state = {
       canDisplay: false,
@@ -53,7 +54,7 @@ class Indicator extends React.Component {
       return null;
     }
 
-    return <StyledSpinner {...this.props} />;
+    return <StyledSpinner {...this.props} fontSize={this._isAppLauncher ? '60px' : '32px'} fontColor={this._isAppLauncher?  '#007bff' : '#ffffff' } />;
   }
 }
 
@@ -66,14 +67,14 @@ Indicator.defaultProps = {
 };
 
 const StyledSpinner = styled(SpinnerIcon)`
-  ${({ fontSize = '60px' }) => `
+  ${({ fontSize }) => `
     font-size: ${fontSize};
     height: ${fontSize};
     width: ${fontSize};
   `}
 
   animation: anim-rotate 2s infinite linear;
-  color: #007bff;
+  ${({ fontColor }) => `color: ${fontColor};`}
   display: inline-block;
   margin: 16px;
   opacity: 0.24;
