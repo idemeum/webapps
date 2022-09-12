@@ -51,7 +51,7 @@ export function AppLauncher(props: ReturnType<typeof useAppLauncher>) {
 
   return (
     <Flex height={windowSize.innerHeight} justifyContent="center" alignItems="center" flex="1" css={{ backgroundColor: 'white' }}>
-      <Indicator />
+      <Indicator isAppLauncher = {true}/>
     </Flex>
   );
 }
