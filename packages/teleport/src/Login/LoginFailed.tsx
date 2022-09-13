@@ -23,10 +23,10 @@ export default function Container() {
   return (
     <Switch>
       <Route path={cfg.routes.loginErrorCallback}>
-        <ErrorPage message="Unable to process callback" redirectUrl={true} />
+        <ErrorPage message="You are not authorized, please contact your administrator." redirectUrl={true} />
       </Route>
       <Route path={cfg.routes.loginErrorLegacy}>
-        <ErrorPage message="You are not authorized, please contact your administrator" redirectUrl={true}/> 
+        <ErrorPage message="You are not authorized, please contact your administrator." redirectUrl={true}/> 
       </Route>
       <Route path={cfg.routes.loginErrorUnauthorized}>
         <ErrorPage message="You are not authorized, please contact your administrator." redirectUrl={true} />
