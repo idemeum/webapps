@@ -6,18 +6,11 @@ import '../assets/idemeum/fonts/fonts.css'
 
 export default function Card({ message, redirectUrl, showIcon }: { message?: string, redirectUrl?: boolean, showIcon?: boolean }) {
 
-    let loginUrl = "";
     const [windowSize, setWindowSize] = useState(getWindowSize());
 
     useEffect(() => {
         function handleWindowResize() {
             setWindowSize(getWindowSize());
-        }
-
-
-        if(redirectUrl) {
-            var hostName = new URL(window.location.href).hostname;
-            loginUrl = hostName.replace(".remote.", ".");
         }
 
         window.addEventListener('resize', handleWindowResize);
@@ -29,6 +22,7 @@ export default function Card({ message, redirectUrl, showIcon }: { message?: str
     }, []);
 
     function getWindowSize() {
+
         const { innerWidth, innerHeight } = window;
         return { innerWidth, innerHeight };
     }
@@ -69,7 +63,7 @@ export default function Card({ message, redirectUrl, showIcon }: { message?: str
                 {redirectUrl ?
                     <Flex justifyContent="center" alignItems="center">
                         <Text style={{ color: 'black', marginTop: 10, fontSize: 15, fontWeight: 500, fontFamily: 'Red Hat Display' }}>
-                            Click <a style={{ color: '#007bff' }} href={loginUrl}>here</a> to Login Again
+                            Click <a style={{ color: '#007bff' }} href={window.location.origin.replace(".remote.","")}>here</a> to Login Again
                         </Text>
                     </Flex> : null}
             </Box>
