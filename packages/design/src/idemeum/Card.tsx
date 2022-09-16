@@ -63,7 +63,7 @@ export default function Card({ message, redirectUrl, showIcon }: { message?: str
                 {redirectUrl ?
                     <Flex justifyContent="center" alignItems="center">
                         <Text style={{ color: 'black', marginTop: 10, fontSize: 15, fontWeight: 500, fontFamily: 'Red Hat Display' }}>
-                            Click <a style={{ color: '#007bff' }} href={window.location.origin.replace(".remote.","")}>here</a> to Login Again
+                            Click <a style={{ color: '#007bff' }} href={window.location.origin.replace(".remote.", ".")}>here</a> to Login Again
                         </Text>
                     </Flex> : null}
             </Box>
